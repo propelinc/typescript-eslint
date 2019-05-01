@@ -1,8 +1,5 @@
-import path from 'path';
 import rule from '../../src/rules/codelyzer/use-pipe-decorator';
 import { RuleTester } from '../RuleTester';
-
-const rootPath = path.join(process.cwd(), 'tests/fixtures/');
 
 //------------------------------------------------------------------------------
 // Tests
@@ -10,10 +7,6 @@ const rootPath = path.join(process.cwd(), 'tests/fixtures/');
 
 const ruleTester = new RuleTester({
   parser: '@typescript-eslint/parser',
-  parserOptions: {
-    tsconfigRootDir: rootPath,
-    project: './tsconfig.json',
-  },
 });
 
 ruleTester.run('use-pipe-decorator', rule, {

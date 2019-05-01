@@ -1,11 +1,9 @@
-import * as ts from 'typescript';
 import * as util from '../../util';
-import { getParserServices } from '../../util';
+import { AngularClassDecorators } from './util/utils';
 import {
-  AngularClassDecorators,
-  getDeclaredInterfaceName,
   getPipeDecorator,
-} from './util/utils';
+  getDeclaredInterfaceName,
+} from './util/utils.ts-estree';
 
 type Options = [];
 type MessageIds = 'usePipeDecorator';
@@ -38,17 +36,11 @@ export default util.createRule<Options, MessageIds>({
   },
   defaultOptions: [],
   create(context) {
-    const services = getParserServices(context);
-
     return {
       ClassDeclaration(node) {
-        const tsNode = services.esTreeNodeToTSNodeMap.get<ts.ClassDeclaration>(
-          node,
-        );
-
         if (
-          getPipeDecorator(tsNode) ||
-          !getDeclaredInterfaceName(tsNode, PIPE_TRANSFORM)
+          getPipeDecorator(node) ||
+          !getDeclaredInterfaceName(node, PIPE_TRANSFORM)
         ) {
           return;
         }
