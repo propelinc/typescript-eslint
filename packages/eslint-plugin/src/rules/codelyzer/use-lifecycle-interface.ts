@@ -1,14 +1,13 @@
-import { TSESTree } from '@typescript-eslint/typescript-estree';
 import * as ts from 'typescript';
 import * as util from '../../util';
 import { getParserServices } from '../../util';
-import {
-  getDeclaredAngularLifecycleInterfaces,
-  isAngularLifecycleMethod,
-  getLifecycleInterfaceByMethodName,
-  AngularLifecycleInterfaces,
-} from './util/utils';
 import { getDeclaredMethods } from './util/classDeclarationUtils';
+import {
+  AngularLifecycleInterfaces,
+  getDeclaredAngularLifecycleInterfaces,
+  getLifecycleInterfaceByMethodName,
+  isAngularLifecycleMethod,
+} from './util/utils';
 
 type Options = [];
 type MessageIds = 'useLifecycleInterface';
@@ -41,7 +40,7 @@ export default util.createRule<Options, MessageIds>({
     const services = getParserServices(context);
 
     return {
-      ClassDeclaration(node: TSESTree.ClassDeclaration) {
+      ClassDeclaration(node) {
         const tsNode = services.esTreeNodeToTSNodeMap.get<ts.ClassDeclaration>(
           node,
         );

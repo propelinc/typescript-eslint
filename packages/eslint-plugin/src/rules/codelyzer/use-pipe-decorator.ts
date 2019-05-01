@@ -8,18 +8,18 @@ import {
 } from './util/utils';
 
 type Options = [];
-type MessageIds = 'usePipeTransformerInterface';
+type MessageIds = 'usePipeDecorator';
 
 const PIPE_TRANSFORM = 'PipeTransform';
 
 export default util.createRule<Options, MessageIds>({
-  name: 'use-pipe-transformer-interface',
+  name: 'use-pipe-decorator',
   meta: {
     type: 'suggestion',
     docs: {
-      description: `Ensures tht classes decorated with @${
+      description: `Ensures that classes implementing ${PIPE_TRANSFORM} interface use @${
         AngularClassDecorators.Pipe
-      } implement ${PIPE_TRANSFORM} interface.`,
+      } decorator`,
       category: 'Best Practices',
       recommended: false,
     },
@@ -31,9 +31,9 @@ export default util.createRule<Options, MessageIds>({
       },
     ],
     messages: {
-      usePipeTransformerInterface: `Classes decorated with @${
+      usePipeDecorator: `Classes that implement the ${PIPE_TRANSFORM} interface should be decorated with @${
         AngularClassDecorators.Pipe
-      } decorator should implement ${PIPE_TRANSFORM} interface`,
+      }`,
     },
   },
   defaultOptions: [],
@@ -47,15 +47,15 @@ export default util.createRule<Options, MessageIds>({
         );
 
         if (
-          !getPipeDecorator(tsNode) ||
-          getDeclaredInterfaceName(tsNode, PIPE_TRANSFORM)
+          getPipeDecorator(tsNode) ||
+          !getDeclaredInterfaceName(tsNode, PIPE_TRANSFORM)
         ) {
           return;
         }
 
         context.report({
           node,
-          messageId: 'usePipeTransformerInterface',
+          messageId: 'usePipeDecorator',
         });
       },
     };
