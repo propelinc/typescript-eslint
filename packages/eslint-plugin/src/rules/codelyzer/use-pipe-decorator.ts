@@ -21,13 +21,7 @@ export default util.createRule<Options, MessageIds>({
       category: 'Best Practices',
       recommended: false,
     },
-    schema: [
-      {
-        type: 'object',
-        additionalProperties: false,
-        properties: {},
-      },
-    ],
+    schema: [],
     messages: {
       usePipeDecorator: `Classes that implement the ${PIPE_TRANSFORM} interface should be decorated with @${
         AngularClassDecorators.Pipe

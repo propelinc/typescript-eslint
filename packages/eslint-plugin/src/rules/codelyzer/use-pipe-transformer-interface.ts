@@ -23,13 +23,7 @@ export default util.createRule<Options, MessageIds>({
       category: 'Best Practices',
       recommended: false,
     },
-    schema: [
-      {
-        type: 'object',
-        additionalProperties: false,
-        properties: {},
-      },
-    ],
+    schema: [],
     messages: {
       usePipeTransformerInterface: `Classes decorated with @${
         AngularClassDecorators.Pipe

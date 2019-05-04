@@ -19,13 +19,7 @@ export default util.createRule<Options, MessageIds>({
       category: 'Best Practices',
       recommended: false,
     },
-    schema: [
-      {
-        type: 'object',
-        additionalProperties: false,
-        properties: {},
-      },
-    ],
+    schema: [],
     messages: {
       useComponentViewEncapsulation: `Using ViewEncapsulation.${NONE} makes your styles global, which may have an unintended effect`,
     },

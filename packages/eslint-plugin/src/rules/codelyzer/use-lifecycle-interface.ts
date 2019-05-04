@@ -24,13 +24,7 @@ export default util.createRule<Options, MessageIds>({
       category: 'Best Practices',
       recommended: false,
     },
-    schema: [
-      {
-        type: 'object',
-        additionalProperties: false,
-        properties: {},
-      },
-    ],
+    schema: [],
     messages: {
       useLifecycleInterface: `Lifecycle interface '{{interfaceName}}' should be implemented for method '{{methodName}}'. (${STYLE_GUIDE_LINK})`,
     },
