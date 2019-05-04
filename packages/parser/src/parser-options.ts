@@ -12,6 +12,7 @@ export interface ParserOptions {
   // ts-estree specific
   filePath?: string;
   project?: string | string[];
+  preserveNodeMaps?: boolean;
   useJSXTextNode?: boolean;
   errorOnUnknownASTType?: boolean;
   errorOnTypeScriptSyntacticAndSemanticIssues?: boolean;

@@ -1,6 +1,6 @@
 import * as ts from 'typescript';
 import * as util from '../../util';
-import { getParserServices } from '../../util';
+import { getNodeMaps } from '../../util';
 import { getDeclaredMethods } from './util/classDeclarationUtils';
 import {
   AngularLifecycleInterfaces,
@@ -37,11 +37,11 @@ export default util.createRule<Options, MessageIds>({
   },
   defaultOptions: [],
   create(context) {
-    const services = getParserServices(context);
+    const nodeMaps = getNodeMaps(context);
 
     return {
       ClassDeclaration(node) {
-        const tsNode = services.esTreeNodeToTSNodeMap.get<ts.ClassDeclaration>(
+        const tsNode = nodeMaps.esTreeNodeToTSNodeMap.get<ts.ClassDeclaration>(
           node,
         );
 
@@ -64,7 +64,7 @@ export default util.createRule<Options, MessageIds>({
           if (isMethodImplemented) continue;
 
           context.report({
-            node: services.tsNodeToESTreeNodeMap.get(methodProperty),
+            node: nodeMaps.tsNodeToESTreeNodeMap.get(methodProperty),
             messageId: 'useLifecycleInterface',
             data: {
               interfaceName,

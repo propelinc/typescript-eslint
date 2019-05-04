@@ -1,8 +1,5 @@
-import path from 'path';
 import rule from '../../src/rules/codelyzer/use-pipe-transformer-interface';
 import { RuleTester } from '../RuleTester';
-
-const rootPath = path.join(process.cwd(), 'tests/fixtures/');
 
 //------------------------------------------------------------------------------
 // Tests
@@ -11,8 +8,7 @@ const rootPath = path.join(process.cwd(), 'tests/fixtures/');
 const ruleTester = new RuleTester({
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    tsconfigRootDir: rootPath,
-    project: './tsconfig.json',
+    preserveNodeMaps: true
   },
 });
 

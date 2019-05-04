@@ -1,12 +1,9 @@
-import path from 'path';
 import rule from '../../src/rules/codelyzer/use-lifecycle-interface';
-import { RuleTester } from '../RuleTester';
 import {
   AngularLifecycleInterfaces,
   AngularLifecycleMethods,
 } from '../../src/rules/codelyzer/util/utils';
-
-const rootPath = path.join(process.cwd(), 'tests/fixtures/');
+import { RuleTester } from '../RuleTester';
 
 //------------------------------------------------------------------------------
 // Tests
@@ -15,8 +12,7 @@ const rootPath = path.join(process.cwd(), 'tests/fixtures/');
 const ruleTester = new RuleTester({
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    tsconfigRootDir: rootPath,
-    project: './tsconfig.json',
+    preserveNodeMaps: true,
   },
 });
 
