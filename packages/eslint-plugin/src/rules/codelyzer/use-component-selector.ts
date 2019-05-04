@@ -3,25 +3,23 @@ import * as util from '../../util';
 import { getNodeMaps } from '../../util';
 import { ComponentMetadata } from './angular';
 import { ngWalkerFactoryUtils } from './angular/ngWalkerFactoryUtils';
-import { getClassName, getDecoratorPropertyInitializer } from './util/utils';
+import { getClassName } from './util/utils';
 
 type Options = [];
-type MessageIds = 'useComponentViewEncapsulation';
-
-const NONE = 'None';
+type MessageIds = 'useComponentSelector';
 
 export default util.createRule<Options, MessageIds>({
-  name: 'use-component-view-encapsulation',
+  name: 'use-component-selector',
   meta: {
     type: 'suggestion',
     docs: {
-      description: `Disallows using ViewEncapsulation.${NONE}`,
+      description: 'Component selector must be declared',
       category: 'Best Practices',
       recommended: false,
     },
     schema: [],
     messages: {
-      useComponentViewEncapsulation: `Using ViewEncapsulation.${NONE} makes your styles global, which may have an unintended effect`,
+      useComponentSelector: `The selector of the component '{{className}}' is mandatory`,
     },
   },
   defaultOptions: [],
@@ -38,24 +36,20 @@ export default util.createRule<Options, MessageIds>({
         if (getClassName(tsNode)) {
           const metadata = metadataReader.read(tsNode);
           if (metadata instanceof ComponentMetadata) {
-            const encapsulationExpression = getDecoratorPropertyInitializer(
-              metadata.decorator,
-              'encapsulation',
-            );
+            const {
+              decorator: metadataDecorator,
+              controller: { name: controllerName },
+              selector: metadataSelector,
+            } = metadata;
 
-            if (
-              !encapsulationExpression ||
-              (ts.isPropertyAccessExpression(encapsulationExpression) &&
-                encapsulationExpression.name.text !== NONE)
-            ) {
-              return;
-            }
+            if (metadataSelector || !controllerName) return;
 
             context.report({
-              node: nodeMaps.tsNodeToESTreeNodeMap.get(
-                (encapsulationExpression as unknown) as ts.ExpressionStatement,
-              ),
-              messageId: 'useComponentViewEncapsulation',
+              node: nodeMaps.tsNodeToESTreeNodeMap.get(metadataDecorator),
+              messageId: 'useComponentSelector',
+              data: {
+                className: controllerName.text,
+              },
             });
           }
         }
