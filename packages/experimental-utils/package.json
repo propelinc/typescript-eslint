@@ -1,5 +1,5 @@
 {
-  "name": "@typescript-eslint/experimental-utils",
+  "name": "@propelinc/experimental-utils",
   "version": "1.9.0",
   "description": "(Experimental) Utilities for working with TypeScript + ESLint together",
   "keywords": [

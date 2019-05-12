@@ -12,7 +12,7 @@ import {
  * Check if the context file name is *.ts or *.tsx
  */
 export function isTypeScriptFile(fileName: string) {
-  return /\.tsx?$/i.test(fileName || '');
+  return /\.tsx?$/i.test(fileName || '') || /\.vue$/i.test(fileName || '');
 }
 
 /**

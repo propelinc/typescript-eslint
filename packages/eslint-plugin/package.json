@@ -1,5 +1,5 @@
 {
-  "name": "@typescript-eslint/eslint-plugin",
+  "name": "@propelinc/eslint-plugin",
   "version": "1.9.0",
   "description": "TypeScript plugin for ESLint",
   "keywords": [
